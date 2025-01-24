@@ -10,18 +10,18 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: itential.iap.system
+module: itential.platform.deactivate_job_worker
 author: Itential
 
-short_description: Get the health of an IAP system
+short_description: deactivate the job worker for an IAP system
 
 description:
-  - The M(itential.iap.system) module returns the health of the
-    IAP system.
+  - The M(itential.platform.deactivate_job_worker) module deactivates a
+   job worker for an IAP system.
 """
 
 
 EXAMPLES = """
-  - name: get the health of a system
-    itential.iap.system:
+  - name: deactivate iap job worker
+    itential.platform.deactivate_job_worker:
 """

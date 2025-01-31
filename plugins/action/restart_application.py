@@ -14,11 +14,11 @@ class ActionModule(ActionBase):
 
     def run(self, tmp=None, task_vars=None):
 
-        adapter_name = self._task.args.get("adapter_name")
-        if not adapter_name:
-            raise AnsibleError("'adapter_name' must be provided.")
+        application_name = self._task.args.get("application_name")
+        if not application_name:
+            raise AnsibleError("'application_name' must be provided.")
 
-        endpoint = f"/adapters/{adapter_name}/restart"
+        endpoint = f"/applications/{application_name}/restart"
         method = "PUT"
 
         return make_request(task_vars, method, endpoint)

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request
-from ansible.errors import AnsibleError
+
 
 class ActionModule(ActionBase):
 
@@ -14,11 +14,18 @@ class ActionModule(ActionBase):
 
     def run(self, tmp=None, task_vars=None):
 
-        adapter_name = self._task.args.get("adapter_name")
-        if not adapter_name:
-            raise AnsibleError("'adapter_name' must be provided.")
+        module_args = self._task.args
 
-        endpoint = f"/adapters/{adapter_name}/restart"
-        method = "PUT"
+        # Construct the params dictionary dynamically
+        params = {}
+        for key, value in module_args.items():
+            if value is not None:
+                params[f"equals[{key}]"] = value
 
-        return make_request(task_vars, method, endpoint)
+        endpoint = "/operations-manager/tasks"
+
+        method = "GET"
+
+        params["include"] = "name,status"
+
+        return make_request(task_vars, method, endpoint, params=params)

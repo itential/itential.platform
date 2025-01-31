@@ -2,7 +2,8 @@
 
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
-from ansible_collections.itential.platform.plugins.module_utils.common_imports import *
+from ansible.plugins.action import ActionBase
+from ansible_collections.itential.platform.plugins.module_utils.request import make_request
 
 class ActionModule(ActionBase):
 
@@ -11,14 +12,8 @@ class ActionModule(ActionBase):
     _requires_connection = False
 
     def run(self, tmp=None, task_vars=None):
-        host, headers, token = initialize_request(task_vars, spec)
-        if not host:
-            return headers
 
-        params = {"token": token}
-        url = http.make_url(host.host, "/workflow_engine/jobWorker/activate", port=host.port, use_tls=host.use_tls)
+        endpoint = "/workflow_engine/jobWorker/deactivate"
         method = "POST"
 
-        display.vvv(f"{method} {url}", host=task_vars["inventory_hostname"])
-
-        return execute_request(host, method, url, params=params, headers=headers)
+        return make_request(task_vars, method, endpoint)

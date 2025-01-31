@@ -14,9 +14,10 @@ from ansible_collections.itential.core.plugins.module_utils import hosts
 
 from ansible_collections.itential.core.plugins.module_utils import http
 
-
-
 def login(host):
+    if not host.username or not host.password:
+        raise AnsibleError("missing required property: username or password")
+
     user = {
         "username": host.username,
         "password": host.password,
@@ -30,24 +31,21 @@ def login(host):
 
     url = http.make_url(host.host, "/login", port=host.port, use_tls=host.use_tls)
 
-    data = json.dumps({"user": user})
-    data = bytes(data, "utf-8")
+    data = json.dumps({"user": user}).encode("utf-8")
     display.v(type(data))
 
-    resp = http.send_request(**{
-        "method": "POST",
-        "url": url,
-        "headers": headers,
-        "data": data,
-        "verify": host.verify,
-        "disable_warnings": host.disable_warnings,
-    })
-
     try:
-        resp.raise_for_status()
+        resp = http.send_request(
+            method="POST",
+            url=url,
+            headers=headers,
+            data=data,
+            verify=host.verify,
+            disable_warnings=host.disable_warnings,
+        )
+        if resp.status_code != 200:
+            raise AnsibleError(f"HTTP request failed: {resp.status_code} {resp.text}")  # 🔹 Explicitly raise error
     except Exception as exc:
-        raise AnsibleError(str(exc))
+        raise AnsibleError(f"HTTP request failed: {str(exc)}")
 
     return resp.text
-
-

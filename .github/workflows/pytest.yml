@@ -23,11 +23,6 @@ jobs:
       run: |
         ansible-galaxy collection install itential.core
 
-    - name: Install Itential Platform Collection (if applicable)
-      run: |
-        ansible-galaxy collection build
-        ansible-galaxy collection install itential-platform-*.tar.gz -p ~/.ansible/collections
-
     - name: Set Ansible Collections Path
       run: |
         echo "ANSIBLE_COLLECTIONS_PATHS=~/.ansible/collections" >> $GITHUB_ENV

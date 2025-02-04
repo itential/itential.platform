@@ -123,5 +123,5 @@ def test_login_timeout(mock_host):
     with patch("ansible_collections.itential.core.plugins.module_utils.http.send_request") as mock_request:
         mock_request.side_effect = TimeoutError("Request timed out")
 
-        with pytest.raises(AnsibleError, match="HTTP request not failed: Request did not timed out"):
+        with pytest.raises(AnsibleError, match="HTTP request failed: Request timed out"):
             login(mock_host)

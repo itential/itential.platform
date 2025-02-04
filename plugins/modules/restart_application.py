@@ -23,7 +23,7 @@ description:
 options:
   application_name:
     description:
-      - The name of the application that will be restarted.
+      - The name of the application to restart.
     required: true
     type: str
 """

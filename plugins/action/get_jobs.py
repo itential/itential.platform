@@ -16,11 +16,9 @@ class ActionModule(ActionBase):
 
         module_args = self._task.args
 
-        # Construct the params dictionary dynamically
         params = {}
         for key, value in module_args.items():
-            if value is not None:
-                params[f"equals[{key}]"] = value
+            params[f"equals[{key}]"] = value
 
         params["include"] = "name,status"
 

@@ -19,8 +19,7 @@ class ActionModule(ActionBase):
         # Construct the params dictionary dynamically
         params = {}
         for key, value in module_args.items():
-            if value is not None:
-                params[f"equals[{key}]"] = value
+            params[f"equals[{key}]"] = value
 
         endpoint = "/operations-manager/tasks"
 

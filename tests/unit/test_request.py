@@ -9,16 +9,13 @@ from ansible_collections.itential.platform.plugins.module_utils.request import m
 def test_make_request_success(mock_http_request, mock_http_login_response, mock_task_vars):
     """Test successful execution of `make_request` when authentication succeeds."""
 
-    # Mock API response for a successful request
     api_response = MagicMock()
     api_response.status_code = 200
     api_response.json.return_value = {"key": "value"}
     api_response.text = json.dumps({"key": "value"})
 
-    # Simulate login followed by the actual request
     mock_http_request.side_effect = [mock_http_login_response, api_response]
 
-    # Execute `make_request`
     result = make_request(
         mock_task_vars,
         "GET",
@@ -27,18 +24,15 @@ def test_make_request_success(mock_http_request, mock_http_login_response, mock_
         data={"data": "test"}
     )
 
-    # Validate response
     assert not result["changed"]
     assert "elapsed_time" in result
     assert result["json"] == {"key": "value"}
     assert mock_http_request.call_count == 2
 
-    # Verify first call (Login request)
     first_call = mock_http_request.call_args_list[0]
     assert first_call[1]["method"] == "POST"
     assert "/login" in first_call[1]["url"]
 
-    # Verify second call (Actual API request)
     second_call = mock_http_request.call_args_list[1]
     assert second_call[1]["method"] == "GET"
     assert "/api/endpoint" in second_call[1]["url"]
@@ -57,16 +51,6 @@ def test_make_request_invalid_json_data(mock_http_request, mock_task_vars):
 
 
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_timeout(mock_http_request, mock_task_vars):
-    """Test handling of timeout errors when making a request."""
-
-    mock_http_request.side_effect = TimeoutError("Request timed out")
-
-    with pytest.raises(AnsibleError, match="HTTP request failed: Request timed out"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
-
-
-@patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
 def test_make_request_invalid_params(mock_http_request, mock_task_vars):
     """Test that `make_request` raises an error when params is not a dictionary."""
 
@@ -75,71 +59,41 @@ def test_make_request_invalid_params(mock_http_request, mock_task_vars):
 
 
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_skipped_due_to_invalid_connection(mock_http_request, mock_task_vars):
-    """Test that `make_request` skips execution when `itential_connection` is not 'http'."""
+def test_make_request_request_exceptions(mock_http_request, mock_task_vars):
+    """Test handling of various request-related exceptions."""
 
-    mock_task_vars["hostvars"]["platform"]["itential_connection"] = "ssh"  # Invalid connection type
+    exception_cases = [
+        (requests.exceptions.ConnectionError("Connection failed"), "HTTP request failed: Connection failed"),
+        (requests.exceptions.InvalidURL("Invalid URL"), "HTTP request failed: Invalid URL"),
+        (requests.exceptions.Timeout("Request timed out"), "HTTP request failed: Request timed out"),
+        (TimeoutError("Request timed out"), "HTTP request failed: Request timed out"),
+    ]
 
-    result = make_request(mock_task_vars, "GET", "/api/endpoint")
-
-    assert result == (None, {"changed": False, "skipped": True})
-    mock_http_request.assert_not_called()  # Ensure no request was made
-
-
-@patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_request_exception(mock_http_request, mock_task_vars):
-    """Test handling of various request exceptions."""
-
-    # Simulate a connection failure
-    mock_http_request.side_effect = requests.exceptions.ConnectionError("Connection failed")
-    with pytest.raises(AnsibleError, match="HTTP request failed: Connection failed"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
-
-    # Simulate an invalid URL error
-    mock_http_request.side_effect = requests.exceptions.InvalidURL("Invalid URL")
-    with pytest.raises(AnsibleError, match="HTTP request failed: Invalid URL"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
-
-    # Simulate a timeout
-    mock_http_request.side_effect = requests.exceptions.Timeout("Request timed out")
-    with pytest.raises(AnsibleError, match="HTTP request failed: Request timed out"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
+    for side_effect, expected_message in exception_cases:
+        mock_http_request.side_effect = side_effect
+        with pytest.raises(AnsibleError, match=expected_message):
+            make_request(mock_task_vars, "GET", "/api/endpoint")
 
 
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_invalid_json_response(mock_http_request, mock_task_vars):
-    """Test handling of an API response that claims to be JSON but is invalid."""
+def test_make_request_invalid_response_handling(mock_http_request, mock_task_vars):
+    """Test handling of invalid API responses including invalid JSON and unexpected content types."""
 
-    # Mock login response
     login_response = MagicMock(status_code=200, text=json.dumps({"token": "mocked_token"}))
     login_response.json.return_value = {"token": "mocked_token"}
 
-    # Mock API response with invalid JSON
-    invalid_json_response = MagicMock(status_code=200, text="Invalid JSON")
-    invalid_json_response.headers = {"Content-Type": "application/json"}
-    invalid_json_response.json.side_effect = ValueError("Invalid JSON")  # Simulate JSON parsing failure
+    invalid_cases = [
+        (
+            MagicMock(status_code=200, text="Invalid JSON", headers={"Content-Type": "application/json"}, json=MagicMock(side_effect=ValueError("Invalid JSON"))),
+            "Failed to parse JSON response: Invalid JSON"
+        ),
+        (
+            MagicMock(status_code=200, text="This is plain text, not JSON.", headers={"Content-Type": "text/plain"}),
+            "Unexpected content type: text/plain"
+        )
+    ]
 
-    mock_http_request.side_effect = [login_response, invalid_json_response]
-
-    # Ensure error is raised due to invalid JSON parsing
-    with pytest.raises(AnsibleError, match="Failed to parse JSON response: Invalid JSON"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
-
-
-@patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_unexpected_content_type(mock_http_request, mock_task_vars):
-    """Test handling of a response with an unexpected content type."""
-
-    # Mock login response
-    login_response = MagicMock(status_code=200, text=json.dumps({"token": "mocked_token"}))
-    login_response.json.return_value = {"token": "mocked_token"}
-
-    # Mock API response with a non-JSON content type
-    unexpected_content_response = MagicMock(status_code=200, text="This is plain text, not JSON.")
-    unexpected_content_response.headers = {"Content-Type": "text/plain"}
-
-    mock_http_request.side_effect = [login_response, unexpected_content_response]
-
-    # Ensure error is raised due to unexpected content type
-    with pytest.raises(AnsibleError, match="Unexpected content type: text/plain"):
-        make_request(mock_task_vars, "GET", "/api/endpoint")
+    for response_mock, expected_message in invalid_cases:
+        mock_http_request.side_effect = [login_response, response_mock]
+        with pytest.raises(AnsibleError, match=expected_message):
+            make_request(mock_task_vars, "GET", "/api/endpoint")

@@ -12,14 +12,10 @@ from ansible_collections.itential.core.plugins.module_utils import hosts
 from ansible_collections.itential.core.plugins.module_utils import display
 from ansible_collections.itential.core.plugins.module_utils import http
 from ansible_collections.itential.platform.plugins.module_utils import host as spec
-import requests 
 
 def make_request(task_vars, method, endpoint, params=None, data=None):
     inventory_hostname = task_vars["inventory_hostname"]
     hostvars = task_vars["hostvars"].get(inventory_hostname)
-
-    if not hostvars.get("itential_connection") == "http":
-        return None, {"changed": False, "skipped": True}
 
     if params is None:
         params = {}

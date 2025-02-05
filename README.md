@@ -1,36 +1,20 @@
-# Ansible Collection - itential.platform
+## Setup Instructions
 
-# License
+### 1. Install Dependencies
+Install all required Python packages:
+```sh
+pip install -r requirements.txt
+```
 
-This project is licensed unser the GPLv3 open source license.  See
-[LICENSE](LICENSE)
+### 2. Install Itential Core Collection
+Since the code depends on the `itential.core` Ansible collection, install it using:
+```sh
+ansible-galaxy collection install itential.core
+```
 
-# Project Dependencies
-
-This project requires the following dependencies:
-
-- **Python** 
-- **Ansible**
-- **Itential Core Collection** from Ansible Galaxy  
-  Install with:  
-  ```sh
-  ansible-galaxy collection install itential.core
-
-Unit tests require the following dependencies:
-- **pytest** (unit tests)
-Install with:
-    ```sh
-    pip install pytest
-- **pytest-ansible**
-Install with:
-    ```sh
-    pip install pytest-ansible 
-- **Coverage**
-Install with:
-    ```sh
-    pip install coverage 
-To see a coverage report you can use:
-    ```coverage run -m pytest tests/ -v ```
-
-Then:
-    ```coverage report```
+### 3. Run Unit Tests with Coverage
+To execute tests and check code coverage:
+```sh
+coverage run -m pytest tests/ -v
+coverage report -m
+```

@@ -85,11 +85,11 @@ def make_request(task_vars, method, endpoint, params=None, data=None):
         host=task_vars["inventory_hostname"]
     )
 
-    result = {"changed": False, "elapsed_time": time.perf_counter() - start_time}
+    # Raise an error for any non-200 response
+    if resp.status_code != 200:
+        raise AnsibleError(f"API request failed with status {resp.status_code}: {resp.text}")
 
-    # Ensure the response is not empty
-    if not resp.text:
-        raise AnsibleError(f"Empty response from API | Method: {method} | URL: {url} | Params: {params}")
+    result = {"changed": False, "elapsed_time": time.perf_counter() - start_time}
 
     # Attempt to parse JSON response if applicable
     if resp.headers.get("Content-Type", "").startswith("application/json"):

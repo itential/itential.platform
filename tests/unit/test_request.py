@@ -92,15 +92,25 @@ def test_make_request_malformed_url(mock_http_request, mock_task_vars):
 
 
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_empty_response(mock_http_request, mock_http_login_response, mock_task_vars):
-    """Test that `make_request` raises an error when the API returns an empty response."""
+def test_make_request_invalid_status_code(mock_http_request, mock_http_login_response, mock_task_vars):
+    """Test that `make_request` raises an error when the API returns a non-200 response (400 Bad Request) for the non-login API request."""
 
-    empty_response = MagicMock(status_code=200, text="")
+    error_response = {
+        "message": "Invalid query parameters provided :\nParameter 'equals' received invalid property paths. The following properties are not supported for this operator in the target document type: exclude",
+        "data": None,
+        "metadata": {}
+    }
 
-    mock_http_request.side_effect = [mock_http_login_response, empty_response]
+    # Mock API responses: First for login (successful), second for actual request (400 error)
+    api_response = MagicMock(status_code=400, text=json.dumps(error_response))
+    api_response.json.return_value = error_response
 
-    with pytest.raises(AnsibleError, match="Empty response from API"):
+    mock_http_request.side_effect = [mock_http_login_response, api_response]  # First call is login, second is real API request
+
+    with pytest.raises(AnsibleError, match=r"API request failed with status 400:.*Invalid query parameters provided.*exclude"):
         make_request(mock_task_vars, "GET", "/api/endpoint")
+
+    assert mock_http_request.call_count == 2
 
 
 @pytest.mark.parametrize("response_text, expected_json", [

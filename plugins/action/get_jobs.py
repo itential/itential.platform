@@ -20,10 +20,10 @@ class ActionModule(ActionBase):
         for key, value in module_args.items():
             params[f"equals[{key}]"] = value
 
-        params["include"] = "name,status"
-
         endpoint = "/operations-manager/jobs"
 
         method = "GET"
+
+        params["include"] = "name,status"
 
         return make_request(task_vars, method, endpoint, params=params)

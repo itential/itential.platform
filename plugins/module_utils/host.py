@@ -32,6 +32,7 @@ options:
     vars:
       - itential_port
       - ansible_port
+      - iap_port
 
   username:
     description:
@@ -41,6 +42,8 @@ options:
       - itential_http_user
       - itential_user
       - ansible_user
+      - iap_username
+      - iap_user
 
   password:
     description:
@@ -50,6 +53,15 @@ options:
       - itential_http_password
       - itential_password
       - ansible_password
+      - iap_password
+      - iap_pass
+
+  iap_auth_token:
+    description:
+      - The authentication token to use for IAP requests (optional)
+    type: str
+    vars:
+      - iap_auth_token
 
   use_tls:
     description:

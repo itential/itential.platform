@@ -49,10 +49,16 @@ def make_request(task_vars, method, endpoint, params=None, data=None):
     if not re.match(r"^https?://[^\s/$.?#].[^\s]*$", url):
         raise AnsibleError(f"Malformed URL: {url}")
 
-    # Check if a token was provided in parameters before attempting to login.
-    if "token" not in params:
-        token = login(host)
-        params["token"] = token
+    # Check if iap_auth_token is provided in task vars
+    auth_token = hostvars.get("iap_auth_token")
+
+    # If auth_token is already provided, add it to params. Otherwise call the login function
+    if auth_token:
+        display.vvv("Using Provided IAP Auth Token")
+        params["token"] = auth_token
+    else:
+        display.vvv("Generating new IAP Auth Token")
+        params["token"] = login(host)
 
     display.vvv(
         f"API Request:\n"

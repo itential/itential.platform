@@ -59,11 +59,16 @@ def test_make_request_invalid_http_method(mock_task_vars):
 
 
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_with_manual_token(mock_http_request, mock_task_vars):
-    """Test that `make_request` does not call `login()` if a token is already provided."""
+@patch("ansible_collections.itential.platform.plugins.module_utils.login.login")
+def test_make_request_with_manual_token(mock_login, mock_http_request, mock_task_vars):
+    """Test that `make_request` does not call `login()` if a token is already provided in task_vars."""
 
     manual_token = "manual-token"
 
+    # Add the manual token to the existing mock_task_vars
+    mock_task_vars["hostvars"]["platform"]["iap_auth_token"] = manual_token
+
+    # Mock HTTP response
     api_response = MagicMock(status_code=200, text=json.dumps({"key": "value"}))
     api_response.json.return_value = {"key": "value"}
     mock_http_request.return_value = api_response
@@ -72,11 +77,16 @@ def test_make_request_with_manual_token(mock_http_request, mock_task_vars):
         mock_task_vars,
         "GET",
         "/api/endpoint",
-        params={"token": manual_token}
+        params={}
     )
 
-    # Ensures login is skipped
+    # Ensure login() is never called since token is already provided
+    mock_login.assert_not_called()
+
+    # Ensure token is correctly used in request
     assert mock_http_request.call_args[1]["params"]["token"] == manual_token
+
+    # Validate response
     assert not result["changed"]
     assert "elapsed_time" in result
     assert result["json"] == {"key": "value"}

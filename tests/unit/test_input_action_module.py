@@ -2,15 +2,11 @@ import pytest
 import json
 from unittest.mock import MagicMock, patch
 from ansible.errors import AnsibleError
-from ansible_collections.itential.platform.plugins.action.restart_adapter import ActionModule as RestartAdapter
-from ansible_collections.itential.platform.plugins.action.restart_application import ActionModule as RestartApplication
 from ansible_collections.itential.platform.plugins.action.get_jobs import ActionModule as GetJobs
 from ansible_collections.itential.platform.plugins.action.get_tasks import ActionModule as GetTasks
 
 # Test cases for action modules that construct parameters dynamically
 @pytest.mark.parametrize("action_module_class, input_args, expected_endpoint, expected_method, expected_params", [
-    (RestartAdapter, {"adapter_name": "netconf"}, "/adapters/netconf/restart", "PUT", None),
-    (RestartApplication, {"application_name": "AGManager"}, "/applications/AGManager/restart", "PUT", None),
     (GetJobs, {"status": "running", "name": "greg"}, "/operations-manager/jobs", "GET", {
         "equals[status]": "running",
         "equals[name]": "greg",
@@ -67,8 +63,6 @@ def test_action_module_with_inputs(mock_http_request, mock_http_login_response, 
 
 # Test cases for missing required arguments
 @pytest.mark.parametrize("action_module_class, missing_args_behavior", [
-    (RestartAdapter, pytest.raises(AnsibleError, match="'adapter_name' must be provided.")),
-    (RestartApplication, pytest.raises(AnsibleError, match="'application_name' must be provided.")),
     (GetJobs, None),
     (GetTasks, None),
 ])

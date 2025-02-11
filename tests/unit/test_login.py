@@ -114,7 +114,7 @@ def test_login_non_200_response(mock_host):
         mock_response.text = "Unauthorized"
         mock_request.return_value = mock_response
 
-        with pytest.raises(AnsibleError, match="HTTP request failed"):
+        with pytest.raises(AnsibleError, match="Unexpected HTTP status code in response:"):
             login(mock_host)
 
 

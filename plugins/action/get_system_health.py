@@ -2,6 +2,14 @@
 
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# Retrieves IAP system health status. No parameters required.
+# Returns: System health information including component statuses.
+# Example:
+#   - name: Get system health
+#     itential.platform.get_system_health:
+#     register: health_status
+
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request
 

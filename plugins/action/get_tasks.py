@@ -2,6 +2,15 @@
 
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# Retrieves list of tasks from IAP. Supports filtering via parameters.
+# Returns: List of task objects with their status and details.
+# Example:
+#   - name: Get tasks by status
+#     itential.platform.get_tasks:
+#       status: completed
+#     register: completed_tasks
+
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request
 

@@ -2,6 +2,14 @@
 
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# Retrieves list of jobs from IAP. No parameters required.
+# Returns: List of job objects with their status and details.
+# Example:
+#   - name: Get all jobs
+#     itential.platform.get_jobs:
+#     register: jobs_result
+
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request
 

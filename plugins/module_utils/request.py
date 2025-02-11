@@ -1,3 +1,18 @@
+# Copyright 2024, Itential Inc. All Rights Reserved
+
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# This module provides a function to send authenticated API requests to the Itential Automation Platform (IAP).
+# It handles:
+# - Constructing the API request with proper authentication.
+# - Validating request parameters such as HTTP method, JSON data, and URL format.
+# - Sending the request and handling various exceptions, including connection errors, timeouts, and HTTP failures.
+# - Processing the API response, ensuring it contains valid JSON when applicable.
+# - Logging request and response details for debugging.
+#
+# The function `make_request()` is used by Ansible modules to interact with IAP.
+
 import json
 import time
 import re
@@ -52,7 +67,7 @@ def make_request(task_vars, method, endpoint, params=None, data=None):
     # Check if iap_auth_token is provided in task vars
     auth_token = hostvars.get("iap_auth_token")
 
-    # If auth_token is already provided, add it to params. Otherwise call the login function
+    # If auth_token is already provided, add it to params. Otherwise, call the login function
     if auth_token:
         display.vvv("Using Provided IAP Auth Token")
         params["token"] = auth_token

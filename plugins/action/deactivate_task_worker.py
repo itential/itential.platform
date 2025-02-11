@@ -2,6 +2,12 @@
 
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
+
+# Deactivates the IAP task worker. No parameters required.
+# Example:
+#   - name: Deactivate task worker
+#     itential.platform.deactivate_task_worker:
+
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request
 

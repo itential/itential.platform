@@ -1,5 +1,6 @@
 import pytest
 import json
+import re
 from unittest.mock import patch, MagicMock
 from ansible.errors import AnsibleError
 import requests
@@ -92,12 +93,56 @@ def test_make_request_with_manual_token(mock_login, mock_http_request, mock_task
     assert result["json"] == {"key": "value"}
 
 
+# VALID URL TESTS
+@pytest.mark.parametrize("valid_url", [
+    "http://example.com/api",
+    "https://example.com/api",
+    "http://sub.domain.com/path",
+    "https://www.example.com/?query=param",
+    "http://localhost:8080/api",
+    "https://127.0.0.1:443/api",
+    "http://example.com/api/resource?key=value",
+    "https://example.com/api#fragment",
+])
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
-def test_make_request_malformed_url(mock_http_request, mock_task_vars):
-    """Test that `make_request` raises an error for a malformed URL."""
+def test_make_request_valid_urls(mock_http_request, mock_http_login_response, mock_task_vars, valid_url):
+    """Test that `make_request` correctly accepts valid URLs."""
+    
+    api_response = MagicMock(status_code=200, text=json.dumps({"status": "success"}))
+    api_response.json.return_value = {"status": "success"}
 
-    with patch("ansible_collections.itential.core.plugins.module_utils.http.make_url", return_value="invalid_url"):
-        with pytest.raises(AnsibleError, match="Malformed URL: invalid_url"):
+    mock_http_request.side_effect = [mock_http_login_response, api_response]
+
+    # Patch `make_url` to return a valid URL
+    with patch("ansible_collections.itential.core.plugins.module_utils.http.make_url", return_value=valid_url):
+        result = make_request(mock_task_vars, "GET", "/api/endpoint")
+
+        assert isinstance(result, dict)
+        assert result["json"]["status"] == "success"
+        assert mock_http_request.call_count == 2  # Login + actual request
+
+
+# INVALID URL TESTS
+@pytest.mark.parametrize("invalid_url", [
+    "example.com/api",  # Missing http/https
+    "ftp://example.com/api",  # Invalid scheme
+    "http//example.com/api",  # Missing colon
+    "://example.com/api",  # Missing scheme
+    "https:/example.com/api",  # Single slash after scheme
+    "http://",  # Incomplete URL
+    "http://?query=param",  # No domain
+    "https:///api",  # Triple slash issue
+    "http://example .com/api",  # Space in URL
+    "https://exa mple.com",  # Space in domain
+    "http://example.com/ api",  # Space in path
+    "http://.com/api",  # No domain before TLD
+])
+@patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")
+def test_make_request_invalid_urls(mock_http_request, mock_http_login_response, mock_task_vars, invalid_url):
+    """Test that `make_request` raises an error for malformed URLs."""
+
+    with patch("ansible_collections.itential.core.plugins.module_utils.http.make_url", return_value=invalid_url):
+        with pytest.raises(AnsibleError, match=re.escape(f"Malformed URL: {invalid_url}")):
             make_request(mock_task_vars, "GET", "/api/endpoint")
 
 

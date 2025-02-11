@@ -44,7 +44,7 @@ def login(host):
             disable_warnings=host.disable_warnings,
         )
         if resp.status_code != 200:
-            raise AnsibleError(f"HTTP request failed: {resp.status_code} {resp.text}")
+            raise AnsibleError(f"Unexpected HTTP status code in response: {resp.status_code} {resp.text}")
     except Exception as exc:
         raise AnsibleError(f"HTTP request failed: {str(exc)}")
 

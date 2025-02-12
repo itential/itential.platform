@@ -1,0 +1,7 @@
+ansible-core==2.16.6
+ansible==8.6.0
+pytest==8.3.4
+pytest-ansible==2.3.0
+requests==2.31.0
+urllib3==2.2.1
+coverage==7.6.10

@@ -62,6 +62,7 @@ options:
     type: str
     vars:
       - iap_auth_token
+      - auth_token
 
   use_tls:
     description:

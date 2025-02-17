@@ -13,23 +13,22 @@ class ActionModule(ActionBase):
     _supports_async = False
     _requires_connection = False
 
+    ALLOWED_METHODS = {"GET", "PUT", "POST", "DELETE"}
+
     def run(self, tmp=None, task_vars=None):
 
         module_args = self._task.args
 
-        # Validate required arguments
-        method = module_args.get("method")
+        method = module_args.get("method", "GET")
         endpoint = module_args.get("endpoint")
-        if not method:
-            raise AnsibleError("'method' must be provided.")
+        
+        if method not in self.ALLOWED_METHODS:
+            raise AnsibleError(f"Invalid HTTP method '{method}'. Allowed values: {', '.join(self.ALLOWED_METHODS)}")
+
         if not endpoint:
             raise AnsibleError("'endpoint' must be provided.")
 
-        # Optional arguments
         params = module_args.get("params", None)
         data = module_args.get("data", None)
 
-        # Execute the request
         return make_request(task_vars, method, endpoint, params=params, data=data)
-
-

@@ -21,11 +21,13 @@ description:
   - This module is useful for interacting with various IAP API endpoints without creating dedicated modules.
 
 options:
-  method:
+    method:
     description:
-      - The HTTP method to use for the request (e.g., GET, POST, PUT, DELETE).
+      - The HTTP method to use for the request.
     required: true
     type: str
+    choices: [GET, PUT, POST, DELETE]
+    default: GET
 
   endpoint:
     description:

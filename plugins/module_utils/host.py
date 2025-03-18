@@ -28,7 +28,6 @@ options:
     description:
       - The port used to connect to the remote host
     type: int
-    default: 3000
     vars:
       - platform_port
       - platform_http_port

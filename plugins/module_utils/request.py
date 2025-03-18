@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# This module provides a function to send authenticated API requests to the Itential Platform (Platform).
+# This module provides a function to send authenticated API requests to the Itential Platform.
 # It handles:
 # - Constructing the API request with proper authentication.
 # - Validating request parameters such as HTTP method, JSON data, and URL format.

@@ -4,14 +4,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
-
-from functools import partial
-
 from ansible.errors import AnsibleError
-
 from ansible_collections.itential.core.plugins.module_utils import display
-from ansible_collections.itential.core.plugins.module_utils import hosts
-
 from ansible_collections.itential.core.plugins.module_utils import http
 
 def login(host):
@@ -32,6 +26,7 @@ def login(host):
     url = http.make_url(host.host, "/login", port=host.port, use_tls=host.use_tls)
 
     data = json.dumps({"user": user}).encode("utf-8")
+    display.v(f"Request URL: {url}")
     display.v(type(data))
 
     try:

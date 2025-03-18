@@ -10,18 +10,18 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: itential.iap.get_system_health
+module: itential.platform.get_system_health
 author: Itential
 
-short_description: Get the health of an IAP system
+short_description: Get the health of a Platform system
 
 description:
-  - The M(itential.iap.get_system_health) module returns the health of the
-    IAP system.
+  - The M(itential.platform.get_system_health) module returns the health of the
+    Platform system.
 """
 
 
 EXAMPLES = """
   - name: get the health of a system
-    itential.iap.get_system_health:
+    itential.platform.get_system_health:
 """

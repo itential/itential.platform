@@ -22,17 +22,17 @@ options:
     type: str
     required: true
     vars:
-      - itential_host
       - ansible_host
 
   port:
     description:
       - The port used to connect to the remote host
     type: int
+    default: 3000
     vars:
-      - itential_port
-      - ansible_port
-      - iap_port
+      - platform_port
+      - platform_http_port
+      - platform_https_port
 
   username:
     description:
@@ -41,9 +41,8 @@ options:
     vars:
       - itential_http_user
       - itential_user
-      - ansible_user
-      - iap_username
-      - iap_user
+      - platform_username
+      - platform_user
 
   password:
     description:
@@ -52,38 +51,37 @@ options:
     vars:
       - itential_http_password
       - itential_password
-      - ansible_password
-      - iap_password
-      - iap_pass
+      - platform_password
+      - platform_pass
 
-  iap_auth_token:
+  platform_auth_token:
     description:
-      - The authentication token to use for IAP requests (optional)
+      - The authentication token to use for Platform requests (optional)
     type: str
     vars:
-      - iap_auth_token
+      - platform_auth_token
 
   use_tls:
     description:
       - Enable or disable the use of TLS for the connection
     type: bool
-    default: true
+    default: false
     vars:
-      - itential_http_use_tls
+      - platform_https
 
   headers:
     description:
       - The set of key/value pairs to include in the header on every request
     type: dict
     vars:
-      - intential_http_headers
+      - platform_http_headers
 
   base_path:
     description:
       - The API base path to prepend for every request
     type: str
     vars:
-      - itential_http_base_path
+      - platform_http_base_path
 
   auth_type:
     description:
@@ -91,7 +89,7 @@ options:
     type: str
     choices: [ "basic", "token" ]
     vars:
-      - itential_http_auth_type
+      - platform_http_auth_type
 
   verify:
     description:
@@ -99,7 +97,7 @@ options:
     type: bool
     default: true
     vars:
-      - itential_http_verify
+      - platform_http_verify
 
   disable_warnings:
     description:
@@ -107,5 +105,5 @@ options:
     type: bool
     default: false
     vars:
-      - itential_http_disable_warnings
+      - platform_http_disable_warnings
 """

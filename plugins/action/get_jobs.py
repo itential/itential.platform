@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# Retrieves list of jobs from IAP. No parameters required.
+# Retrieves list of jobs from Platform. No parameters required.
 # Returns: List of job objects with their status and details.
 # Example:
 #   - name: Get all jobs

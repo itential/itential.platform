@@ -13,12 +13,12 @@ DOCUMENTATION = """
 module: itential.platform.restart_applications
 author: Itential
 
-short_description: Restart one or more applications in the IAP system.
+short_description: Restart one or more applications in the Platform system.
 
 description:
   - The M(itential.platform.restart_applications) module restarts one or more applications in the 
-    IAP system using the names provided via the C(application_names) argument.
-  - This module communicates with the IAP API to perform the restart operation.
+    Platform system using the names provided via the C(application_names) argument.
+  - This module communicates with the Platform API to perform the restart operation.
   - The C(application_names) parameter supports both a single application name (as a string) and multiple application names (as a list).
 
 options:
@@ -33,19 +33,19 @@ options:
 EXAMPLES = """
   - name: Restart a single application (string input)
     itential.platform.restart_applications:
-      application_names: iap-core
+      application_names: OperationsManager
     delegate_to: localhost
 
   - name: Restart a single application (list input)
     itential.platform.restart_applications:
       application_names:
-        - iap-core
+        - OperationsManager
     delegate_to: localhost
 
   - name: Restart multiple applications
     itential.platform.restart_applications:
       application_names:
-        - iap-core
+        - OperationsManager
         - ag-manager
     delegate_to: localhost
 """

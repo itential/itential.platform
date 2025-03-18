@@ -13,15 +13,15 @@ DOCUMENTATION = """
 module: itential.platform.deactivate_task_worker
 author: Itential
 
-short_description: deactivate the task worker for an IAP system
+short_description: deactivate the task worker for a Platform system
 
 description:
   - The M(itential.platform.deactivate_task_worker) module deactivates a
-   task worker for an IAP system.
+   task worker for a Platform system.
 """
 
 
 EXAMPLES = """
-  - name: deactivate iap task worker
+  - name: deactivate platform task worker
     itential.platform.deactivate_task_worker:
 """

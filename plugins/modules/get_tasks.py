@@ -13,10 +13,10 @@ DOCUMENTATION = """
 module: itential.platform.get_tasks
 author: Itential
 
-short_description: Retrieve a list of tasks from an IAP system with optional filtering.
+short_description: Retrieve a list of tasks from a Platform system with optional filtering.
 
 description:
-  - The M(itential.platform.get_tasks) module retrieves a list of tasks from an IAP system.
+  - The M(itential.platform.get_tasks) module retrieves a list of tasks from a Platform system.
   - Users can provide key-value pairs as arguments to filter the results based on task attributes.
   - Filters are dynamically converted to query parameters, allowing for flexible task retrieval.
   - The response includes the task name and status by default.

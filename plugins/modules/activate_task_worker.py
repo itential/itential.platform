@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.activate_task_worker
 author: Itential
 
-short_description: Activate the task worker for a Platform system
+short_description: Activate the task worker for an Itential Platform system
 
 description:
   - The M(itential.platform.activate_task_worker) module activates a
-   task worker for a Platform system.
+   task worker for an Itential Platform system.
 """
 
 

@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.get_system_health
 author: Itential
 
-short_description: Get the health of a Platform system
+short_description: Get the health of an Itential Platform system
 
 description:
   - The M(itential.platform.get_system_health) module returns the health of the
-    Platform system.
+    Itential Platform system.
 """
 
 

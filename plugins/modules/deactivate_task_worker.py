@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.deactivate_task_worker
 author: Itential
 
-short_description: deactivate the task worker for a Platform system
+short_description: deactivate the task worker for an Itential Platform system
 
 description:
   - The M(itential.platform.deactivate_task_worker) module deactivates a
-   task worker for a Platform system.
+   task worker for an Itential Platform system.
 """
 
 

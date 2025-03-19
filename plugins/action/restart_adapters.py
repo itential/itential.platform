@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# Restarts one or more Platform adapters.
+# Restarts one or more Itential Platform adapters.
 # Parameters:
 #   adapter_names: A single adapter name (str) or a list of adapter names (list).
 #
@@ -34,7 +34,7 @@ class ActionModule(ActionBase):
     _requires_connection = False
 
     def run(self, tmp=None, task_vars=None):
-        """Restart one or more Platform adapters by making API requests."""
+        """Restart one or more Itential Platform adapters by making API requests."""
 
         adapter_names = self._task.args.get("adapter_names")
         if not adapter_names:

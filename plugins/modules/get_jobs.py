@@ -13,10 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.get_jobs
 author: Itential
 
-short_description: Retrieve a list of jobs from a Platform system with optional filtering.
+short_description: Retrieve a list of jobs from an Itential Platform system with optional filtering.
 
 description:
-  - The M(itential.platform.get_jobs) module retrieves a list of jobs from a Platform system.
+  - The M(itential.platform.get_jobs) module retrieves a list of jobs from an 
+    Itential Platform system.
   - Users can provide key-value pairs as arguments to filter the results based on job attributes.
   - Filters are dynamically converted to query parameters, allowing for flexible job retrieval.
   - The response includes the job name and status by default.

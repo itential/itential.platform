@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.deactivate_job_worker
 author: Itential
 
-short_description: deactivate the job worker for a Platform system
+short_description: deactivate the job worker for an Itential Platform system
 
 description:
   - The M(itential.platform.deactivate_job_worker) module deactivates a
-   job worker for a Platform system.
+   job worker for an Itential Platform system.
 """
 
 

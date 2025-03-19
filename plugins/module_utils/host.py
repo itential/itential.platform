@@ -55,7 +55,7 @@ options:
 
   platform_auth_token:
     description:
-      - The authentication token to use for Platform requests (optional)
+      - The authentication token to use for Itential Platform requests (optional)
     type: str
     vars:
       - platform_auth_token

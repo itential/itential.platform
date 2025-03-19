@@ -13,13 +13,14 @@ DOCUMENTATION = """
 module: itential.platform.restart_applications
 author: Itential
 
-short_description: Restart one or more applications in the Platform system.
+short_description: Restart one or more applications in the Itential Platform system.
 
 description:
   - The M(itential.platform.restart_applications) module restarts one or more applications in the 
-    Platform system using the names provided via the C(application_names) argument.
-  - This module communicates with the Platform API to perform the restart operation.
-  - The C(application_names) parameter supports both a single application name (as a string) and multiple application names (as a list).
+    Itential Platform system using the names provided via the C(application_names) argument.
+  - This module communicates with the Itential Platform API to perform the restart operation.
+  - The C(application_names) parameter supports both a single application name (as a string) and 
+    multiple application names (as a list).
 
 options:
   application_names:

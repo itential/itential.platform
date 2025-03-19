@@ -13,10 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.auth_token
 author: Itential
 
-short_description: Generate an authentication token for Platform.
+short_description: Generate an authentication token for Itential Platform.
 
 description:
-  - The M(itential.platform.auth_token) module generates an authentication token for a Platform system.
+  - The M(itential.platform.auth_token) module generates an authentication token for an 
+    Itential Platform system.
   - This token can be used to authenticate API requests within the platform.
   - The module does not require any input parameters.
 

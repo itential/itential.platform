@@ -7,11 +7,12 @@
 # It handles:
 # - Constructing the API request with proper authentication.
 # - Validating request parameters such as HTTP method, JSON data, and URL format.
-# - Sending the request and handling various exceptions, including connection errors, timeouts, and HTTP failures.
+# - Sending the request and handling various exceptions, including connection errors, timeouts, and 
+# HTTP failures.
 # - Processing the API response, ensuring it contains valid JSON when applicable.
 # - Logging request and response details for debugging.
 #
-# The function `make_request()` is used by Ansible modules to interact with Platform.
+# The function `make_request()` is used by Ansible modules to interact with Itential Platform.
 
 import json
 import time
@@ -69,10 +70,10 @@ def make_request(task_vars, method, endpoint, params=None, data=None):
 
     # If auth_token is already provided, add it to params. Otherwise, call the login function
     if auth_token:
-        display.vvv("Using Provided Platform Auth Token")
+        display.vvv("Using Provided Itential Platform Auth Token")
         params["token"] = auth_token
     else:
-        display.vvv("Generating new Platform Auth Token")
+        display.vvv("Generating new Itential Platform Auth Token")
         params["token"] = login(host)
 
     display.vvv(

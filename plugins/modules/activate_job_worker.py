@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.activate_job_worker
 author: Itential
 
-short_description: Activate the job worker for a Platform system
+short_description: Activate the job worker for an Itential Platform system
 
 description:
   - The M(itential.platform.activate_job_worker) module activates a
-   job worker for a Platform system.
+   job worker for an Itential Platform system.
 """
 
 

@@ -9,19 +9,22 @@
 #
 # Examples:
 #   - name: Restart a single application (string input)
-#     itential.platform.restart_application:
-#       application_names: "platform-core"
-#
+#     itential.platform.restart_applications:
+#       application_names: OperationsManager
+#     delegate_to: localhost
+
 #   - name: Restart a single application (list input)
-#     itential.platform.restart_application:
+#     itential.platform.restart_applications:
 #       application_names:
-#         - platform-core
-#
+#         - OperationsManager
+#     delegate_to: localhost
+
 #   - name: Restart multiple applications
-#     itential.platform.restart_application:
+#     itential.platform.restart_applications:
 #       application_names:
-#         - platform-core
+#         - OperationsManager
 #         - ag-manager
+#     delegate_to: localhost
 
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request

@@ -9,13 +9,11 @@ from ansible_collections.itential.platform.plugins.action.get_tasks import Actio
 @pytest.mark.parametrize("action_module_class, input_args, expected_endpoint, expected_method, expected_params", [
     (GetJobs, {"status": "running", "name": "greg"}, "/operations-manager/jobs", "GET", {
         "equals[status]": "running",
-        "equals[name]": "greg",
-        "include": "name,status"
+        "equals[name]": "greg"
     }),
     (GetTasks, {"status": "running", "name": "greg"}, "/operations-manager/tasks", "GET", {
         "equals[status]": "running",
-        "equals[name]": "greg",
-        "include": "name,status"
+        "equals[name]": "greg"
     }),
 ])
 @patch("ansible_collections.itential.core.plugins.module_utils.http.send_request")

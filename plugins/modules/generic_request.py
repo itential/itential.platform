@@ -13,12 +13,14 @@ DOCUMENTATION = """
 module: itential.platform.api_request
 author: Itential
 
-short_description: Send a generic API request to an IAP system.
+short_description: Send a generic API request to an Itential Platform system.
 
 description:
-  - The M(itential.platform.api_request) module allows users to send generic API requests to an IAP system.
+  - The M(itential.platform.api_request) module allows users to send generic API requests to an 
+    Itential Platform system.
   - It supports specifying the HTTP method, endpoint, query parameters, and request body data.
-  - This module is useful for interacting with various IAP API endpoints without creating dedicated modules.
+  - This module is useful for interacting with various Itential Platform API endpoints without 
+    creating dedicated modules.
 
 options:
     method:

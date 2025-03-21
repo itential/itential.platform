@@ -13,15 +13,15 @@ DOCUMENTATION = """
 module: itential.platform.activate_task_worker
 author: Itential
 
-short_description: Activate the task worker for an IAP system
+short_description: Activate the task worker for an Itential Platform system
 
 description:
   - The M(itential.platform.activate_task_worker) module activates a
-   task worker for an IAP system.
+   task worker for an Itential Platform system.
 """
 
 
 EXAMPLES = """
-  - name: activate iap task worker
+  - name: activate platform task worker
     itential.platform.activate_task_worker:
 """

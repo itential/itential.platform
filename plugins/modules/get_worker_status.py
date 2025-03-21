@@ -13,11 +13,11 @@ DOCUMENTATION = """
 module: itential.platform.get_worker_status
 author: Itential
 
-short_description: Get the worker status from an IAP system
+short_description: Get the worker status from an Itential Platform system
 
 description:
   - The M(itential.platform.get_worker_status) module returns the status of job
-   and task workers from an IAP system.
+   and task workers from an Itential Platform system.
 """
 
 

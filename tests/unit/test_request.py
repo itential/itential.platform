@@ -67,7 +67,7 @@ def test_make_request_with_manual_token(mock_login, mock_http_request, mock_task
     manual_token = "manual-token"
 
     # Add the manual token to the existing mock_task_vars
-    mock_task_vars["hostvars"]["platform"]["iap_auth_token"] = manual_token
+    mock_task_vars["hostvars"]["platform"]["platform_auth_token"] = manual_token
 
     # Mock HTTP response
     api_response = MagicMock(status_code=200, text=json.dumps({"key": "value"}))

@@ -32,75 +32,75 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 ## Available Modules
 
 ### Job Worker Management
-- **activate_job_worker**: Activate the job worker for an IAP system
+- **activate_job_worker**: Activate the job worker for an Itential Platform system
   ```yaml
-  - name: Activate IAP job worker
+  - name: Activate Itential Platform job worker
     itential.platform.activate_job_worker:
   ```
 
-- **deactivate_job_worker**: Deactivate the job worker for an IAP system
+- **deactivate_job_worker**: Deactivate the job worker for an Itential Platform system
   ```yaml
-  - name: Deactivate IAP job worker
+  - name: Deactivate Itential Platform job worker
     itential.platform.deactivate_job_worker:
   ```
 
 ### Task Worker Management
-- **activate_task_worker**: Activate the task worker for an IAP system
+- **activate_task_worker**: Activate the task worker for an Itential Platform system
   ```yaml
-  - name: Activate IAP task worker
+  - name: Activate Itential Platform task worker
     itential.platform.activate_task_worker:
   ```
 
-- **deactivate_task_worker**: Deactivate the task worker for an IAP system
+- **deactivate_task_worker**: Deactivate the task worker for an Itential Platform system
   ```yaml
-  - name: Deactivate IAP task worker
+  - name: Deactivate Itential Platform task worker
     itential.platform.deactivate_task_worker:
   ```
 
 ### System Information
-- **get_system_health**: Retrieve the health status of an IAP system
+- **get_system_health**: Retrieve the health status of an Itential Platform system
   ```yaml
-  - name: Get IAP system health
+  - name: Get Itential Platform system health
     itential.platform.get_system_health:
   ```
 
-- **get_worker_status**: Get the current status of IAP workers
+- **get_worker_status**: Get the current status of Itential Platform workers
   ```yaml
-  - name: Get IAP worker status
+  - name: Get Itential Platform worker status
     itential.platform.get_worker_status:
   ```
 
 ### Job and Task Management
-- **get_jobs**: Retrieve a list of jobs from an IAP system
+- **get_jobs**: Retrieve a list of jobs from an Itential Platform system
   ```yaml
-  - name: Get IAP jobs
+  - name: Get Itential Platform jobs
     itential.platform.get_jobs:
   ```
 
-- **get_tasks**: Retrieve a list of tasks from an IAP system
+- **get_tasks**: Retrieve a list of tasks from an Itential Platform system
   ```yaml
-  - name: Get IAP tasks
+  - name: Get Itential Platform tasks
     itential.platform.get_tasks:
   ```
 
 ### System Administration
-- **restart_adapter**: Restart a specific adapter in the IAP system
+- **restart_adapter**: Restart a specific adapter in the Itential Platform system
   ```yaml
-  - name: Restart IAP adapter
+  - name: Restart Itential Platform adapter
     itential.platform.restart_adapter:
       adapter_name: "my-adapter"
   ```
 
-- **restart_application**: Restart the IAP application
+- **restart_application**: Restart the Itential Platform application
   ```yaml
-  - name: Restart IAP application
+  - name: Restart Itential Platform application
     itential.platform.restart_application:
   ```
 
 ### Connection Parameters
 Each module requires the following connection parameters which can be defined in your Ansible environment:
-- `host`: The hostname or IP of the IAP instance
-- `port`: The port number for the IAP API
+- `host`: The hostname or IP of the Itential Platform instance
+- `port`: The port number for the Itential Platform API
 - `use_tls`: Whether to use HTTPS (default: true)
 - `verify`: Whether to verify SSL certificates (default: true)
 - `disable_warnings`: Whether to disable SSL warning messages (default: false)

@@ -13,15 +13,15 @@ DOCUMENTATION = """
 module: itential.platform.deactivate_job_worker
 author: Itential
 
-short_description: deactivate the job worker for an IAP system
+short_description: deactivate the job worker for an Itential Platform system
 
 description:
   - The M(itential.platform.deactivate_job_worker) module deactivates a
-   job worker for an IAP system.
+   job worker for an Itential Platform system.
 """
 
 
 EXAMPLES = """
-  - name: deactivate iap job worker
+  - name: deactivate platform job worker
     itential.platform.deactivate_job_worker:
 """

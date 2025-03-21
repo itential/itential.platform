@@ -13,13 +13,14 @@ DOCUMENTATION = """
 module: itential.platform.restart_adapters
 author: Itential
 
-short_description: Restart one or more adapters in the IAP system.
+short_description: Restart one or more adapters in the Itential Platform system.
 
 description:
   - The M(itential.platform.restart_adapters) module restarts one or more adapters in the 
-    IAP system using the names provided via the C(adapter_names) argument. 
-  - This module communicates with the IAP API to perform the restart operation.
-  - The C(adapter_names) parameter supports both a single adapter name (as a string) and multiple adapter names (as a list).
+    Itential Platform system using the names provided via the C(adapter_names) argument. 
+  - This module communicates with the Itential Platform API to perform the restart operation.
+  - The C(adapter_names) parameter supports both a single adapter name (as a string) and 
+    multiple adapter names (as a list).
 
 options:
   adapter_names:

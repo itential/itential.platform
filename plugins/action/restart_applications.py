@@ -3,24 +3,24 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# Restarts one or more IAP applications.
+# Restarts one or more Itential Platform applications.
 # Parameters:
 #   application_names: A single application name (str) or a list of application names (list).
 #
 # Examples:
 #   - name: Restart a single application (string input)
-#     itential.platform.restart_application:
-#       application_names: "iap-core"
+#     itential.platform.restart_applications:
+#       application_names: OperationsManager
 #
 #   - name: Restart a single application (list input)
-#     itential.platform.restart_application:
+#     itential.platform.restart_applications:
 #       application_names:
-#         - iap-core
+#         - OperationsManager
 #
 #   - name: Restart multiple applications
-#     itential.platform.restart_application:
+#     itential.platform.restart_applications:
 #       application_names:
-#         - iap-core
+#         - OperationsManager
 #         - ag-manager
 
 from ansible.plugins.action import ActionBase
@@ -34,7 +34,7 @@ class ActionModule(ActionBase):
     _requires_connection = False
 
     def run(self, tmp=None, task_vars=None):
-        """Restart one or more IAP applications by making API requests."""
+        """Restart one or more Itential Platform applications by making API requests."""
 
         application_names = self._task.args.get("application_names")
         if not application_names:
@@ -53,4 +53,4 @@ class ActionModule(ActionBase):
             response = make_request(task_vars, method, endpoint)
             results.append(response)
 
-        return {"results": results}  # Always return a list
+        return {"results": results}

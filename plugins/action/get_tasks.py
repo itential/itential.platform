@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# Retrieves list of tasks from IAP. Supports filtering via parameters.
+# Retrieves list of tasks from Itential Platform. Supports filtering via parameters.
 # Returns: List of task objects with their status, details, and type.
 # Example:
 #   - name: Get tasks by status

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Retrieves list of tasks from Itential Platform. Supports filtering via parameters.
-# Returns: List of task objects with their status and details.
+# Returns: List of task objects with their status, details, and type.
 # Example:
 #   - name: Get tasks by status
 #     itential.platform.get_tasks:
@@ -33,6 +33,6 @@ class ActionModule(ActionBase):
 
         method = "GET"
 
-        params["include"] = "name,status"
+        params["include"] = "name,status,type"
 
         return make_request(task_vars, method, endpoint, params=params)

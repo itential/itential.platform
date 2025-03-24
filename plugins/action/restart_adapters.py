@@ -53,4 +53,4 @@ class ActionModule(ActionBase):
             response = make_request(task_vars, method, endpoint)
             results.append(response)
 
-        return {"results": results}  # Always return a list
+        return {"results": results}

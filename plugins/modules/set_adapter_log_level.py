@@ -10,18 +10,48 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: itential.platform.worker_status
+module: set_adapter_log_level
 author: Itential
-
-short_description: Get a list of active tasks from an Itential Platform system
+short_description: Set the logging level for a specific Itential Platform adapter
 
 description:
-  - The M(itential.platform.worker_status) module returns a list of active 
-  tasks from an Itential Platform system.
+  - The C(set_adapter_log_level) module configures the log level and transport
+    method (file or console) for a specific adapter running on the Itential Platform.
+
+options:
+  adapter_name:
+    description:
+      - Name of the adapter to update the logging level for.
+    required: true
+    type: str
+
+  log_level:
+    description:
+      - Logging level to set for the adapter.
+      - Common values include C(debug), C(info), C(warn), C(error).
+    required: true
+    type: str
+
+  transport:
+    description:
+      - Output transport to apply the log level to.
+      - Valid values are C(file) and C(console).
+    required: true
+    type: str
 """
 
-
 EXAMPLES = """
-  - name: get a list of active tasks
-    itential.platform.worker_status:
+- name: Set adapter logging to debug using file transport
+  itential.platform.set_adapter_log_level:
+    adapter_name: network-adapter
+    log_level: debug
+    transport: file
+"""
+
+RETURN = """
+changed:
+  description: Whether the log level was successfully updated.
+  returned: always
+  type: bool
+  sample: true
 """

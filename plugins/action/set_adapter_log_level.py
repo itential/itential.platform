@@ -4,14 +4,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Sets the logging level for a specific Itential Platform adapter.
+#
 # Parameters:
-#   adapter_name: Name of the adapter
-#   log_level: Desired log level (debug, info, warn, error)
-# Example:
-#   - name: Set adapter logging to debug
+#   adapter_name: Name of the adapter (e.g., "network-adapter")
+#   log_level: Desired log level ("debug", "info", "warn", "error")
+#   transport: Logging transport ("file" or "console")
+#
+# Example usage:
+#   - name: Set adapter logging to debug using file transport
 #     itential.platform.set_adapter_log_level:
 #       adapter_name: network-adapter
 #       log_level: debug
+#       transport: file
 
 from ansible.plugins.action import ActionBase
 from ansible_collections.itential.platform.plugins.module_utils.request import make_request

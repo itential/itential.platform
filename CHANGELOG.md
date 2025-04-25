@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.1 (April 25, 2025)
+
+* Added ansible version to metadata file  https://github.com/itential/itential.platform/pull/8
+* Galaxy prep  https://github.com/itential/itential.platform/pull/9
+* Update galaxy version and changelog for release ain [skip ci]
+
+Full Changelog: https://github.com/itential/itential.platform/compare/v1.0.0...v1.0.1 
+
+
 ## v1.0.0 (April 25, 2025)
 
 * Added files needed to push to galaxy  https://github.com/itential/itential.platform/pull/6

@@ -41,82 +41,82 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 - **activate_job_worker**: Activate the job worker for an Itential Platform system
 
-  ```yaml
-  - name: Activate Itential Platform job worker
-    itential.platform.activate_job_worker:
-  ```
+```yaml
+- name: Activate Itential Platform job worker
+  itential.platform.activate_job_worker:
+```
 
 - **deactivate_job_worker**: Deactivate the job worker for an Itential Platform system
 
-  ```yaml
-  - name: Deactivate Itential Platform job worker
-    itential.platform.deactivate_job_worker:
-  ```
+```yaml
+- name: Deactivate Itential Platform job worker
+  itential.platform.deactivate_job_worker:
+```
 
 ### Task Worker Management
 
 - **activate_task_worker**: Activate the task worker for an Itential Platform system
 
-  ```yaml
-  - name: Activate Itential Platform task worker
-    itential.platform.activate_task_worker:
-  ```
+```yaml
+- name: Activate Itential Platform task worker
+  itential.platform.activate_task_worker:
+```
 
 - **deactivate_task_worker**: Deactivate the task worker for an Itential Platform system
 
-  ```yaml
-  - name: Deactivate Itential Platform task worker
-    itential.platform.deactivate_task_worker:
-  ```
+```yaml
+- name: Deactivate Itential Platform task worker
+  itential.platform.deactivate_task_worker:
+```
 
 ### System Information
 
 - **get_system_health**: Retrieve the health status of an Itential Platform system
 
-  ```yaml
-  - name: Get Itential Platform system health
-    itential.platform.get_system_health:
-  ```
+```yaml
+- name: Get Itential Platform system health
+  itential.platform.get_system_health:
+```
 
 - **get_worker_status**: Get the current status of Itential Platform workers
 
-  ```yaml
-  - name: Get Itential Platform worker status
-    itential.platform.get_worker_status:
-  ```
+```yaml
+- name: Get Itential Platform worker status
+  itential.platform.get_worker_status:
+```
 
 ### Job and Task Management
 
 - **get_jobs**: Retrieve a list of jobs from an Itential Platform system
 
-  ```yaml
-  - name: Get Itential Platform jobs
-    itential.platform.get_jobs:
-  ```
+```yaml
+- name: Get Itential Platform jobs
+  itential.platform.get_jobs:
+```
 
 - **get_tasks**: Retrieve a list of tasks from an Itential Platform system
 
-  ```yaml
-  - name: Get Itential Platform tasks
-    itential.platform.get_tasks:
-  ```
+```yaml
+- name: Get Itential Platform tasks
+  itential.platform.get_tasks:
+```
 
 ### System Administration
 
 - **restart_adapter**: Restart a specific adapter in the Itential Platform system
 
-  ```yaml
-  - name: Restart Itential Platform adapter
-    itential.platform.restart_adapter:
-      adapter_name: "my-adapter"
-  ```
+```yaml
+- name: Restart Itential Platform adapter
+  itential.platform.restart_adapter:
+    adapter_name: "my-adapter"
+```
 
 - **restart_application**: Restart the Itential Platform application
 
-  ```yaml
-  - name: Restart Itential Platform application
-    itential.platform.restart_application:
-  ```
+```yaml
+- name: Restart Itential Platform application
+  itential.platform.restart_application:
+```
 
 ### Connection Parameters
 

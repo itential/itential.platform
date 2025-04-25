@@ -8,6 +8,7 @@
 * Deployer3 variables  https://github.com/itential/itential.platform/pull/4
 * Genericrequest  https://github.com/itential/itential.platform/pull/3
 * Set adapter log level  https://github.com/itential/itential.platform/pull/7
+* Update galaxy version and changelog for release 1.0.0 [skip ci]
 * Update galaxy version and changelog for release ain [skip ci]
 * Update galaxy version and changelog for release evel [skip ci]
 * Update get tasks  https://github.com/itential/itential.platform/pull/5

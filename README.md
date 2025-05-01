@@ -118,6 +118,40 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
   itential.platform.restart_application:
 ```
 
+- **set_adapter_log_level**: Change the log level/transport of an adapter.
+  
+```yaml
+  - name: Restart Itential Platform application
+    itential.platform.restart_applications:
+```
+
+### Misc
+- **auth_token**: Retrieves the auth token from an Itential Platform system
+  
+```yaml
+  - name: Retrieve auth token
+    itential.platform.auth_token:
+```
+
+- **generic_request**: Makes an api reqeust given a method and endpoint
+  
+```yaml
+  - name: Retrieve authorization accounts
+    itential.platform.generic_request:
+      method: GET
+      endpoint: "/authorization/accounts"
+```
+
+## Module Utils
+
+This collection includes 3 utils which are used by the action plugins.
+
+- **host**: A schema used to gather information from the ansible_task vars.
+
+- **login**: A utility that authenticates with the platform and returns the authentication token.
+
+- **request**: A utility that authenticates then constructs and sends an api request. Takes task_vars, method, endpoint, params, and data as arguments.
+
 ### Connection Parameters
 
 Each module requires the following connection parameters which can be defined in your Ansible environment:
